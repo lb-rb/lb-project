@@ -1,0 +1,29 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+root = Dir.pwd
+$LOAD_PATH << File.join(root, 'lib')
+
+require 'yaml'
+LB_PROJECT_YML = 'config/lb-project.yml'
+config_file = File.join(root, LB_PROJECT_YML)
+unless File.exist?(config_file)
+  puts "#{LB_PROJECT_YML} not found: '#{config_file}'"
+  exit 1
+end
+config = YAML.load_file(config_file)
+
+begin
+  namespace = config.fetch('namespace')
+  require namespace
+  LB::Project::Render.new.call
+  exit 0
+rescue KeyError
+  puts "'namespace' not set in '#{LB_PROJECT_YML}'!"
+  raise
+rescue LoadError
+  puts "Can not require namespace '#{namespace}'!"
+  puts "Please fix namespace in '#{LB_PROJECT_YML}'."
+  raise
+end
+exit 1

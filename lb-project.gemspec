@@ -24,10 +24,10 @@ Gem::Specification.new do |gem|
   gem.extra_rdoc_files      = %w[README.md]
   gem.required_ruby_version = '>= 2.5'
 
-  gem.add_dependency 'dry-initializer',  '~> 2.3',  '< 2.4'
-  gem.add_dependency 'dry-struct',       '~> 0.4',  '< 0.5'
-  gem.add_dependency 'dry-types',        '~> 0.12', '< 0.13'
-  gem.add_dependency 'dry-view',         '~> 0.3',  '>= 0.3.0', '< 0.3.1'
+  gem.add_dependency 'dry-initializer',  '~> 2.4'
+  gem.add_dependency 'dry-struct',       '~> 0.5'
+  gem.add_dependency 'dry-types',        '~> 0.13'
+  gem.add_dependency 'dry-view',         '~> 0.5'
   gem.add_dependency 'r18n-core',        '~> 2.2',  '< 2.3'
   gem.add_dependency 'roda',             '~> 2.29', '< 2.30'
   gem.add_dependency 'roda-i18n',        '~> 0.3', '< 0.4'

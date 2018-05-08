@@ -129,6 +129,9 @@ module LB
   end
 end
 
+# API
+require 'lb/project/api'
+
 # Site
 require 'lb/project/site'
 

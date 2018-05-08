@@ -8,23 +8,16 @@ describe LB::Project, '.root' do
   let(:object) { described_class }
 
   context 'without setup' do
-    it 'should return nil' do
-      expect(subject).to be_nil
+    it 'should raise argument error' do
+      expect { subject }.to raise_error ArgumentError,
+                                        'Call LB::Project.setup(...) first!'
     end
   end
 
   context 'without setup' do
-    let(:root) { double(:root) }
+    include_context 'setup'
 
-    before(:each) do
-      object.setup(root)
-    end
-
-    after(:each) do
-      object.remove_instance_variable(:@root)
-    end
-
-    it 'should return nil' do
+    it 'should return root' do
       expect(subject).to be(root)
     end
   end

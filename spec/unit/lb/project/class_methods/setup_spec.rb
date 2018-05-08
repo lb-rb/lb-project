@@ -3,14 +3,11 @@
 require 'spec_helper'
 
 describe LB::Project, '.setup' do
-  subject { object.setup(root) }
+  include_context 'setup'
 
-  let(:root)   { double(:root) }
+  subject { object.setup(settings) }
+
   let(:object) { described_class }
-
-  after(:each) do
-    object.remove_instance_variable(:@root)
-  end
 
   it 'should return self' do
     expect(subject).to eql(object)

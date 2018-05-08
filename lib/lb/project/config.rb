@@ -4,6 +4,7 @@ module LB
   module Project
     # Configuration
     class Config < Dry::Struct
+      ERROR_MSG = 'load failed: config class is not a LB::Project::Condig'
       RequiredString = Types::Strict::String.constrained(min_size: 1)
 
       attribute :base_path, Types::Strict::String
@@ -11,24 +12,17 @@ module LB
       attribute :public_path, Types::Strict::String
       attribute :template_path, Types::Strict::String
 
-      def self.load(root, name, env)
-        path = File.join(File.join(root, 'config'), "#{name}.yml")
-        yaml = File.exist?(path) ? YAML.load_file(path) : {}
+      def self.load(path, klass = LB::Project::Config)
+        raise ArgumentError, ERROR_MSG unless klass <= LB::Project::Config
 
-        new(config(yaml, env))
+        raise ArgumentError, not_found_msg(path) unless File.exist?(path)
+
+        yaml = YAML.load_file(path)
+        klass.new(yaml.transform_keys!(&:to_sym))
       end
 
-      def self.config(yaml, env)
-        schema.keys.each_with_object({}) do |key, memo|
-          memo[key] = value_for(yaml, env, key)
-        end
-      end
-
-      def self.value_for(yaml, env, key)
-        ENV.fetch(
-          key.to_s.upcase,
-          yaml.fetch(env.to_s, {})[key.to_s]
-        )
+      def self.not_found_msg(path)
+        "load failed: config file '#{path}' does not exist!"
       end
     end
   end

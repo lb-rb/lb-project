@@ -7,51 +7,18 @@ describe LB::Project, '.config' do
 
   let(:object) { described_class }
 
-  let(:default_hash) do
-    {
-      base_path: '',
-      image_base_path: 'assets/images',
-      public_path: 'docs',
-      template_path: 'templates'
-    }
-  end
-
-  let(:default) { LB::Project::Config.new(default_hash) }
-
-  let(:env) { 'RACK_ENV' }
-
-  before(:each) do
-    root = LB::Project.root_for(__FILE__, 6)
-    LB::Project.setup(File.join(root, 'spec/fixtures'))
-  end
-
-  after(:each) do
-    object.remove_instance_variable(:@rack_env)
-    object.remove_instance_variable(:@config)
-    object.remove_instance_variable(:@root)
-  end
-
-  context 'without RACK_ENV' do
-    it 'should return default config' do
-      expect(subject).to eql(default)
+  context 'without setup' do
+    it 'should raise argument error' do
+      expect { subject }.to raise_error ArgumentError,
+                                        'Call LB::Project.setup(...) first!'
     end
   end
 
-  context 'with RACK_ENV=production' do
-    let(:production_hash) { default_hash.merge(public_path: 'htdocs') }
-    let(:production) { LB::Project::Config.new(production_hash) }
-    let(:rack_env) { 'production' }
+  context 'without setup' do
+    include_context 'setup'
 
-    before(:each) do
-      ENV[env] = rack_env
-    end
-
-    after(:each) do
-      ENV.delete(env)
-    end
-
-    it 'should return production config' do
-      expect(subject).to eql(production)
+    it 'should return config' do
+      expect(subject).to be config
     end
   end
 end

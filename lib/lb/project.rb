@@ -24,24 +24,29 @@ require 'lb/project/types'
 
 # Config
 require 'lb/project/config'
+require 'lb/project/settings'
 
 # LB namespace
 module LB
   # Project
   module Project
-    CONFIG_NAME = 'application'
-    DEFAULT_RACK_ENV = 'development'
+    ERROR_MSG = 'Setup failed: settings is not a LB::Project::Settings'
 
     # Setup
     #
-    # @param [File] root Path to project root
+    # @param [settings] project settings
     #
     # @return [self]
     #
     # @api private
     #
-    def self.setup(root)
-      @root = root
+    def self.setup(settings)
+      unless settings.is_a?(LB::Project::Settings)
+        raise ArgumentError,
+              ERROR_MSG
+      end
+
+      @settings = settings
 
       self
     end
@@ -53,7 +58,9 @@ module LB
     # @api private
     #
     def self.root
-      @root
+      @settings.root
+    rescue NoMethodError
+      raise ArgumentError, 'Call LB::Project.setup(...) first!'
     end
 
     # Get root path for file
@@ -99,27 +106,9 @@ module LB
     # @api private
     #
     def self.config
-      @config ||= Config.load(root, CONFIG_NAME, rack_env)
-    end
-
-    # Get RACK_ENV
-    #
-    # @return [String]
-    #
-    # @api private
-    #
-    def self.rack_env
-      @rack_env ||= ENV.fetch('RACK_ENV', DEFAULT_RACK_ENV)
-    end
-
-    # Check if rack_env is 'development'
-    #
-    # @return [Boolean]
-    #
-    # @api private
-    #
-    def self.development?
-      DEFAULT_RACK_ENV.eql? rack_env
+      @settings.config
+    rescue NoMethodError
+      raise ArgumentError, 'Call LB::Project.setup(...) first!'
     end
 
     def self.t(*params)

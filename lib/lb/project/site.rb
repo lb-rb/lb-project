@@ -18,6 +18,12 @@ module LB
         options.fetch(*args)
       end
 
+      def with(opts)
+        options.merge!(opts)
+
+        self
+      end
+
       def path_for(bundle, type)
         path = 'webpack-assets.json'
         file = File.read(path)

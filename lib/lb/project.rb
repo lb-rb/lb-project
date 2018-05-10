@@ -6,6 +6,7 @@ require 'yaml'
 # Web
 require 'roda'
 require 'roda/plugins/public'
+require 'rack/csrf'
 
 # r18n
 require 'r18n-core'

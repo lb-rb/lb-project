@@ -38,5 +38,6 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'guard-rspec',    '~> 4.7', '>= 4.7.3'
   gem.add_development_dependency 'guard-rubocop',  '~> 1.3'
   gem.add_development_dependency 'rubocop',        '~> 0.52'
+  gem.add_development_dependency 'shotgun',        '~> 0.9.2'
   gem.add_development_dependency 'slim',           '~> 3.0'
 end

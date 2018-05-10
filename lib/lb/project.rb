@@ -55,6 +55,10 @@ module LB
       self
     end
 
+    def self.settings
+      @settings
+    end
+
     # Get root path
     #
     # @return [dir_name]

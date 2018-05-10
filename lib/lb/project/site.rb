@@ -42,6 +42,33 @@ module LB
       def image_path(path)
         "#{LB::Project.config.image_base_path}/#{path}"
       end
+
+      def escaped_json(data)
+        "JSON#{Rack::Utils.escape_html(JSON.generate(escape_all(data)))}"
+      end
+
+      def escape_all(data)
+        case data
+        when Array
+          escape_array(data)
+        when Hash
+          escape_hash(data)
+        when String
+          Rack::Utils.escape_html(data)
+        else
+          data
+        end
+      end
+
+      def escape_array(data)
+        data.map(&method(:escape_all))
+      end
+
+      def escape_hash(data)
+        data.map do |key, value|
+          [key, escape_all(value)]
+        end.to_h
+      end
     end
   end
 end

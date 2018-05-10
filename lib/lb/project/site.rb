@@ -70,6 +70,18 @@ module LB
         end.to_h
       end
 
+      def csrf_token
+        self[:csrf_token].call
+      end
+
+      def csrf_metatag
+        self[:csrf_metatag].call
+      end
+
+      def csrf_tag
+        self[:csrf_tag].call
+      end
+
       def session
         self[:session].call
       end

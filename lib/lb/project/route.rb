@@ -8,7 +8,7 @@ module LB
         translations = [File.join(LB::Project.root, 'locales')]
         route.plugin :i18n, translations: translations
         route.opts[:root] = LB::Project.root
-        route.plugin :public, root: 'docs'
+        route.plugin :public, root: LB::Project.config.public_path
         route.plugin :flash
         route.plugin :lb_project
         route.plugin :json

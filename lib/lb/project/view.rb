@@ -11,8 +11,8 @@ module LB
         view.setting :layout, 'main'
       end
 
-      def view_locals(options)
-        options
+      def with(_options)
+        self
       end
     end
   end

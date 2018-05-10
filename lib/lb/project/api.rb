@@ -34,7 +34,7 @@ module LB
       #
       # @api private
       #
-      def self.template_path
+      def template_path
         LB::Project.template_path
       end
 
@@ -44,7 +44,7 @@ module LB
       #
       # @api private
       #
-      def self.public_path
+      def public_path
         LB::Project.public_path
       end
 
@@ -54,15 +54,15 @@ module LB
       #
       # @api private
       #
-      def self.config
+      def config
         LB::Project.config
       end
 
-      def self.t(*params)
+      def t(*params)
         LB::Project.t(*params)
       end
 
-      def self.logger
+      def logger
         LB::Project.logger
       end
     end

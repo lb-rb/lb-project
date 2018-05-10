@@ -44,7 +44,7 @@ module LB
 
         def self.define_registry_as(registry_name, rmethod)
           define_method("register_#{registry_name}_as") do |key|
-            send(rmethod).register(key.to_s, self)
+            send(rmethod).register(key.to_sym, self)
             instance_variable_set("@#{registry_name}_key", key.to_s)
           end
         end

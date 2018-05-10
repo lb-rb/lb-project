@@ -28,6 +28,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'dry-struct',       '~> 0.5'
   gem.add_dependency 'dry-types',        '~> 0.13'
   gem.add_dependency 'dry-view',         '~> 0.5'
+  gem.add_dependency 'rack_csrf',        '~> 2.6'
   gem.add_dependency 'roda',             '~> 3.7'
   gem.add_dependency 'roda-i18n',        '~> 0.4'
 
@@ -37,5 +38,6 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'guard-rspec',    '~> 4.7', '>= 4.7.3'
   gem.add_development_dependency 'guard-rubocop',  '~> 1.3'
   gem.add_development_dependency 'rubocop',        '~> 0.52'
+  gem.add_development_dependency 'shotgun',        '~> 0.9.2'
   gem.add_development_dependency 'slim',           '~> 3.0'
 end

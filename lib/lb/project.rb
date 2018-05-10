@@ -6,6 +6,7 @@ require 'yaml'
 # Web
 require 'roda'
 require 'roda/plugins/public'
+require 'rack/csrf'
 
 # r18n
 require 'r18n-core'
@@ -21,6 +22,9 @@ require 'lb/project/version'
 
 # Custom Types
 require 'lb/project/types'
+
+# Site
+require 'lb/project/site'
 
 # Config
 require 'lb/project/config'
@@ -49,6 +53,10 @@ module LB
       @settings = settings
 
       self
+    end
+
+    def self.settings
+      @settings
     end
 
     # Get root path
@@ -132,9 +140,6 @@ end
 # API
 require 'lb/project/api'
 
-# Site
-require 'lb/project/site'
-
 # Routing
 require 'lb/project/route'
 require 'lb/project/app'
@@ -149,3 +154,6 @@ require 'lb/project/page'
 
 # Render
 require 'lb/project/render'
+
+# Roda Plugin
+require 'lb/project/roda'

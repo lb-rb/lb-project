@@ -69,6 +69,14 @@ module LB
           [key, escape_all(value)]
         end.to_h
       end
+
+      def session
+        self[:session].call
+      end
+
+      def logged_in?
+        session.key?(:user_id)
+      end
     end
   end
 end

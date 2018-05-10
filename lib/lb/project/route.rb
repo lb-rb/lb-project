@@ -9,6 +9,9 @@ module LB
         route.plugin :i18n, translations: translations
         route.opts[:root] = LB::Project.root
         route.plugin :public, root: 'docs'
+        route.plugin :flash
+        route.plugin :lb_project
+        route.plugin :json
       end
     end
   end

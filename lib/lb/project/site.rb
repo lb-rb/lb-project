@@ -6,6 +6,11 @@ module LB
     class Site
       include R18n::Helpers
 
+      DEFAULT_MESSAGE_TYPES = {
+        notice: { level: :success, timeout: 5 },
+        alert:  { level: :error,   timeout: 0 }
+      }.freeze
+
       def initialize(context = {})
         @context = context
       end
@@ -100,6 +105,16 @@ module LB
 
       def logged_in?
         session.key?(:user_id)
+      end
+
+      def message_types
+        DEFAULT_MESSAGE_TYPES
+      end
+
+      def messages
+        flash.map do |type, message|
+          { message: message }.merge(MESSAGE_TYPES[type])
+        end
       end
     end
   end

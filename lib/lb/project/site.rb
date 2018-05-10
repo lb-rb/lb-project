@@ -70,6 +70,18 @@ module LB
         end.to_h
       end
 
+      def flash?
+        %i[notice alert].any? { |type| flash[type] }
+      end
+
+      def with_flash(flash)
+        with(flash: flash)
+      end
+
+      def flash
+        self[:flash, {}]
+      end
+
       def csrf_token
         self[:csrf_token].call
       end

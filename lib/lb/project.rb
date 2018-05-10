@@ -23,6 +23,9 @@ require 'lb/project/version'
 # Custom Types
 require 'lb/project/types'
 
+# Site
+require 'lb/project/site'
+
 # Config
 require 'lb/project/config'
 require 'lb/project/settings'
@@ -132,9 +135,6 @@ end
 
 # API
 require 'lb/project/api'
-
-# Site
-require 'lb/project/site'
 
 # Routing
 require 'lb/project/route'

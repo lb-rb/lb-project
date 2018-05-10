@@ -154,3 +154,6 @@ require 'lb/project/page'
 
 # Render
 require 'lb/project/render'
+
+# Roda Plugin
+require 'lb/project/roda'

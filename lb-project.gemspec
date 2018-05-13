@@ -25,8 +25,8 @@ Gem::Specification.new do |gem|
   gem.required_ruby_version = '>= 2.5'
 
   gem.add_dependency 'dry-initializer',  '~> 2.4'
-  gem.add_dependency 'dry-struct',       '~> 0.5'
-  gem.add_dependency 'dry-types',        '~> 0.13'
+  gem.add_dependency 'dry-struct',       '>= 0.4',  '< 0.6'
+  gem.add_dependency 'dry-types',        '>= 0.12', '< 0.14'
   gem.add_dependency 'dry-view',         '~> 0.5'
   gem.add_dependency 'rack_csrf',        '~> 2.6'
   gem.add_dependency 'roda',             '~> 3.7'

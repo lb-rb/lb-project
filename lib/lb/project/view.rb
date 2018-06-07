@@ -6,9 +6,9 @@ module LB
     class View < Dry::View::Controller
       extend LB::Project::Registry::Registration[:view]
 
-      def self.setup(view)
+      def self.setup(view, layout = 'main')
         view.setting :paths, [LB::Project.template_path]
-        view.setting :layout, 'main'
+        view.setting :layout, layout
       end
 
       def with(_options)

@@ -19,6 +19,11 @@ class Roda
           registry[name].new.with(overrides.merge(site: current_site)).render
         end
 
+        def flush_flash
+          flash.keep
+          flash.sweep
+        end
+
         private
 
         def current_site

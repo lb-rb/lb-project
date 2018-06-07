@@ -8,21 +8,21 @@ class Roda
       # Plugin instance methods
       module InstanceMethods
         def page(name, overrides = {})
-          page = LB::Project::Page.page_registry[name].new
-          page.call(current_context(page.with(overrides)))
+          view_for(LB::Project::Page.page_registry, name, overrides)
+        end
+
+        def view(name, overrides = {})
+          view_for(LB::Project::View.view_registry, name, overrides)
+        end
+
+        def view_for(registry, name, overrides)
+          registry[name].new.with(overrides.merge(site: current_site)).render
         end
 
         private
 
         def current_site
           site.with_flash(flash)
-        end
-
-        def current_context(page)
-          {
-            context: ::Struct.new(:site, :page).new(current_site, page),
-            locals: {}
-          }
         end
 
         def site

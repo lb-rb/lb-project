@@ -113,7 +113,7 @@ module LB
 
       def messages
         flash.map do |type, message|
-          { message: message }.merge(MESSAGE_TYPES[type])
+          { message: message }.merge(message_types[type])
         end
       end
     end

@@ -12,7 +12,8 @@ shared_context 'setup' do
   let(:settings) do
     LB::Project::Settings.new(
       root: root,
-      config: config
+      config: config,
+      site: LB::Project::Site
     )
   end
 
